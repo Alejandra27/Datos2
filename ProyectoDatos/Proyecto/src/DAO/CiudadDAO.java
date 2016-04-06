@@ -1,5 +1,5 @@
 package DAO;
 
-public class CiudadDAO {
-
+public class CiudadDAO
+{
 }
