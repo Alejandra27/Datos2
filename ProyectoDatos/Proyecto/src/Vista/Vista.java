@@ -9,7 +9,7 @@ import servidor.Servidor;
 /**
  * Metodo principal del proyecto
  * @author Alejandra27
- * Cambio cambio
+ * Cambio 
  */
 
 public class Vista implements ActionListener
