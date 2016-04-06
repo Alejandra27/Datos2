@@ -1,5 +1,5 @@
 package DAO;
 
-public class VueloDAO {
-
+public class VueloDAO
+{
 }
