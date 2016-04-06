@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import java.awt.ScrollPane;
 import java.awt.TextArea;
 import java.awt.TextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Interfaz extends JFrame {
 
@@ -50,7 +52,11 @@ public class Interfaz extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Ingresar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnNewButton.setBounds(32, 207, 89, 23);
 		contentPane.add(btnNewButton);
 		
@@ -65,15 +71,15 @@ public class Interfaz extends JFrame {
 		dtrpnDo.setBounds(58, 21, 106, 20);
 		contentPane.add(dtrpnDo);
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnNewButton_1 = new JButton("Eliminar");
 		btnNewButton_1.setBounds(131, 207, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("Actualizar");
 		btnNewButton_2.setBounds(230, 207, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("New button");
+		JButton btnNewButton_3 = new JButton("Consultar");
 		btnNewButton_3.setBounds(329, 207, 89, 23);
 		contentPane.add(btnNewButton_3);
 		
