@@ -7,7 +7,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 public class Servidor
 {
@@ -57,20 +60,29 @@ public class Servidor
             conexion = DriverManager.getConnection(
                     "jdbc:oracle:thin:@localhost:1521:xe", "Pepee", "qwerty");
             System.out.println("Conexion exitosa a la base de datos");
+            
+            
+            
 
-            ServerSocket servidor = new ServerSocket(PUERTO);
+            ServerSocket servidor = new ServerSocket(PUERTO+1);
             System.out.println("El puerto se ha abierto");
             System.out.println("esperando conexion con el cliente");
-            Socket cliente = servidor.accept();
-            System.out.println("nueva conexion con el cliente" + cliente.getInetAddress().getHostAddress());
-            BufferedReader in = new BufferedReader( new InputStreamReader(cliente.getInputStream()));
-            PrintWriter out = new PrintWriter(cliente.getOutputStream(), true);
+            //Socket cliente = servidor.accept();
+            //System.out.println("nueva conexion con el cliente" + cliente.getInetAddress().getHostAddress());
+            //BufferedReader in = new BufferedReader( new InputStreamReader(cliente.getInputStream()));
+            //PrintWriter out = new PrintWriter(cliente.getOutputStream(), true);
 
-            conexion.nativeSQL("select * from PASAJEROS");
+           // String res = conexion.
+            //String sql = in.readLine();
+            st = conexion.createStatement();
+            ResultSet res = null;
+            res = st.executeQuery("SELECT * FROM PASAJEROS");
 
-            String sql = in.readLine();
-
-            
+            while(res.next())
+            {
+            	String nombre = res.getString("NOMBRE");
+            	System.out.println(nombre);
+            }
             
         }
         catch (Exception e)
