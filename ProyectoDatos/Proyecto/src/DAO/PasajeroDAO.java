@@ -2,9 +2,9 @@ package DAO;
 
 import java.awt.List;
 
+import clases.IDTO;
 import clases.Pasajero;
 import interfaces.AerolineaDAO;
-import servidor.HiloServidor;
 
 public class PasajeroDAO implements AerolineaDAO {
 
@@ -14,13 +14,14 @@ public class PasajeroDAO implements AerolineaDAO {
 	public PasajeroDAO() {
 	}
 
-	@Override
-	public boolean insertar(IDTO datos, objetos para comucarme con el servidor) {
-		try {
-			Pasajero c = new Pasajero(Integer.parseInt(parametros[0]), parametros[1], parametros[2], parametros[3],
+	
+	//public boolean insertar(IDTO datos, objetos para comucarme con el servidor) {
+	public boolean insertar() {
+		/*try {
+			//Pasajero c = new Pasajero(Integer.parseInt(parametros[0]), parametros[1], parametros[2], parametros[3],
 					Integer.parseInt(parametros[4]));
 			String sql = c.insertar();
-			objeto que envia .enviarInstruccion(sql);
+			//objeto que envia .enviarInstruccion(sql);
 			String res = socket.darRespuestaServer();
 			if (res.equalsIgnoreCase("true")) {
 				return true;
@@ -28,12 +29,13 @@ public class PasajeroDAO implements AerolineaDAO {
 				return false;
 		} catch (Exception e) {
 			return false;
-		}
+		}*/
+		return true;
 	}
 
 	@Override
 	public boolean eliminar(int PrimayKey) {
-		try {
+		/*try {
 			Pasajero c = new Pasajero(PrimayKey);
 			String sql = c.eliminar();
 			socket.enviarInstruccion(sql);
@@ -55,7 +57,8 @@ public class PasajeroDAO implements AerolineaDAO {
 			System.out.println("Error de " + e.getMessage());
 			e.printStackTrace();
 			return false;
-		}
+		}*/
+		return true;
 	}
 
 	public boolean consultar() {
@@ -79,6 +82,12 @@ public class PasajeroDAO implements AerolineaDAO {
 
 	@Override
 	public boolean actualizar() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean insertar(String[] parametros) {
 		// TODO Auto-generated method stub
 		return false;
 	}

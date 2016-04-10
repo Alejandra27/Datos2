@@ -20,9 +20,9 @@ public class Vista implements ActionListener
     public Vista() throws Exception
     {
         // TODO Auto-generated constructor stub
-        HiloServidor socket = new HiloServidor(null, null);
+        HiloServidor socket = new HiloServidor(null, null,null);
         int nuevo = 1521;
-        System.out.println(socket.eliminarCliente(nuevo));
+        //System.out.println(socket.eliminarCliente(nuevo));// :(
         // servidor = new Servidor();
     }
 
