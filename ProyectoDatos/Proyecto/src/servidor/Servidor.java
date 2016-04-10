@@ -1,6 +1,9 @@
 package servidor;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -12,89 +15,59 @@ import java.sql.Statement;
 
 import javax.naming.spi.DirStateFactory.Result;
 
-public class Servidor
-{
+public class Servidor {
 
-    public static final int PUERTO = 1521;
+	public static final int PUERTO = 1521;
 
-    Connection conexion;
-    Statement st;
+	private ServerSocket servidor;
+	private Conexion con;
 
-    public boolean insertar(String x)
-    {
-        try
-        {
-            st = conexion.createStatement();
-            st.execute(x);
-            st.close();
-            st = null;
-            return true;
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-    }
+	private void procesar() {
+		while(true){
+			try {
+				Socket cliente = servidor.accept();
+			    DataInputStream in = new DataInputStream(cliente.getInputStream());
+			    DataOutputStream out = new DataOutputStream(cliente.getOutputStream());
+//inString  outString outObhect
+                Runnable  run = new HiloServidor(con, in, out);
+                Thread hilo = new Thread(run);
+                hilo.start();
+			    
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
-    public boolean eliminar(String x)
-    {
-        try
-        {
-            st = conexion.createStatement();
-            st.execute(x);
-            st.close();
-            st = null;
-            return true;
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-    }
+	public Servidor() {
+		try {
 
-    public Servidor()
-    {
-        try
-        {
-            Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
-            conexion = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe", "Pepee", "qwerty");
-            System.out.println("Conexion exitosa a la base de datos");
-            
-            
-            
+			servidor = new ServerSocket(PUERTO + 1);
+			con = new Conexion("jdbc:oracle:thin:@localhost:1521:xe", "Pepee", "qwerty");
 
-            ServerSocket servidor = new ServerSocket(PUERTO+1);
-            System.out.println("El puerto se ha abierto");
-            System.out.println("esperando conexion con el cliente");
-            //Socket cliente = servidor.accept();
-            //System.out.println("nueva conexion con el cliente" + cliente.getInetAddress().getHostAddress());
-            //BufferedReader in = new BufferedReader( new InputStreamReader(cliente.getInputStream()));
-            //PrintWriter out = new PrintWriter(cliente.getOutputStream(), true);
+			/*
+			 * st = conexion.createStatement(); ResultSet res = null; res =
+			 * st.executeQuery("SELECT * FROM PASAJEROS");
+			 * 
+			 * while (res.next()) { String nombre = res.getString("NOMBRE");
+			 * String cedula = res.getString("CEDULA"); String silla =
+			 * res.getString("SILLA"); String genero = res.getString("GENERO");
+			 * String edad = res.getString("EDAD");
+			 * 
+			 * System.out.println("Nombre:" + " " + nombre + " " + "| " + "ID:"
+			 * + " " + cedula + " " + "| " +"Silla:" + " " + silla + " " + "| "
+			 * + "Genero:" + " " + genero + " " + "| " +"Edad:" + " " + edad); }
+			 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-           // String res = conexion.
-            //String sql = in.readLine();
-            st = conexion.createStatement();
-            ResultSet res = null;
-            res = st.executeQuery("SELECT * FROM PASAJEROS");
+	}
 
-            while(res.next())
-            {
-            	String nombre = res.getString("NOMBRE");
-            	System.out.println(nombre);
-            }
-            
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+	public static void main(String[] args) {
+		Servidor ns = new Servidor();
+		ns.procesar();
+	}
 
-    }
-    
-    
-    public static void main(String[] args)
-    {
-        Servidor ns = new Servidor();
-    }
 }

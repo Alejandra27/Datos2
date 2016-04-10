@@ -8,21 +8,19 @@ import servidor.HiloServidor;
 
 public class PasajeroDAO implements AerolineaDAO {
 
-	private HiloServidor socket;
 
 	public List pasajeros;
 
-	public PasajeroDAO(HiloServidor socket) {
-		this.socket = socket;
+	public PasajeroDAO() {
 	}
 
 	@Override
-	public boolean insertar(String parametros[]) {
+	public boolean insertar(IDTO datos, objetos para comucarme con el servidor) {
 		try {
 			Pasajero c = new Pasajero(Integer.parseInt(parametros[0]), parametros[1], parametros[2], parametros[3],
 					Integer.parseInt(parametros[4]));
 			String sql = c.insertar();
-			socket.enviarInstruccion(sql);
+			objeto que envia .enviarInstruccion(sql);
 			String res = socket.darRespuestaServer();
 			if (res.equalsIgnoreCase("true")) {
 				return true;

@@ -1,6 +1,6 @@
 package clases;
 
-public class Ciudad
+public class Ciudad implements IDTO
 {
     private int codigo;
     private String nombre;
@@ -41,4 +41,28 @@ public class Ciudad
     {
         this.nombre = nombre;
     }
+
+	@Override
+	public String insertar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String consultar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String eliminar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String actualizar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
